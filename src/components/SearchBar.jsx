@@ -9,7 +9,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button'
-
+import baseUrl from '../utils/baseUrl';
 const SearchBar = (props) => {
 
     //piece of state for storing data to send to backend
@@ -45,7 +45,7 @@ const SearchBar = (props) => {
         try {
             //response variable to get data from /search path of server. '?term' for the api endpoint is the search term, so insert requestData's term prop and replace empty space with + 
             //insert requestData's catagory prop into entity query parameter for the catagory. If the entity query parameter is empty, the api will respond with 'all' catagories 
-            const response = await fetch(`/search?term=${requestData.term.replace(' ', '+')}&entity=${requestData.catagory}`, {
+            const response = await fetch(`${baseUrl}/search?term=${requestData.term.replace(' ', '+')}&entity=${requestData.catagory}`, {
                 //specify method for request. Get because we are just getting information from the server
                 method: 'GET',
                 //specify content type of request in headers of request
