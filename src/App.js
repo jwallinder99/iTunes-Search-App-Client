@@ -4,15 +4,17 @@ import './App.css';
 import SearchBar from './components/SearchBar'
 import FavSideBar from './components/FavSideBar'
 import { createTheme, ThemeProvider } from '@mui/material';
+import  CssBaseline  from '@mui/material/CssBaseline';
 
 const theme = createTheme({
     typography: {
       fontFamily: 'Helvetica+Neue'
     },
     palette: {
+      mode: 'dark',
       primary: {
-        main: '#99ffcc',
-      },
+        main: '#99ffcc'
+      }
     },    
 })
 
@@ -38,12 +40,9 @@ function App() {
       setFavourites(favourites.filter((favourite) => favourite !== item))
     }
     
-    useEffect(() => {
-      console.log(favourites)
-    }, [favourites])
-
     return (
       <ThemeProvider  theme={theme}>
+        <CssBaseline />
         <Container>
           <Typography variant="h4" data-testid="heading-component">iTunes Search</Typography>
           <Box sx={{

@@ -10,6 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button'
 import baseUrl from '../utils/baseUrl';
+import Loader from './Loader'
 const SearchBar = (props) => {
 
     //piece of state for storing data to send to backend
@@ -20,6 +21,8 @@ const SearchBar = (props) => {
 
     //piece of state for received data
     const [ receivedData, setReceivedData] = useState([])
+    //piece of state for loading component
+    const [isLoading, setIsLoading] = useState(false)
 
     //function to handle storing catagory in request
     const handleRadioClick = e => {
@@ -43,6 +46,8 @@ const SearchBar = (props) => {
        
         //try catch blocks for making a request to the server
         try {
+            //set loading state to true for loading component
+            setIsLoading(true)
             //response variable to get data from /search path of server. '?term' for the api endpoint is the search term, so insert requestData's term prop and replace empty space with + 
             //insert requestData's catagory prop into entity query parameter for the catagory. If the entity query parameter is empty, the api will respond with 'all' catagories 
             const response = await fetch(`${baseUrl}/search?term=${requestData.term.replace(' ', '+')}&entity=${requestData.catagory}`, {
@@ -65,6 +70,8 @@ const SearchBar = (props) => {
             console.log(data)
             //set receivedData piece of state to received data from request to server
             setReceivedData(data)
+            //set loading state back to false
+            setIsLoading(false)
             //reset requestData state to empty
             setRequestData({
                 term: '',
@@ -85,6 +92,9 @@ const SearchBar = (props) => {
     //the searcHReseults component is inserted under the box component representing the search form, it is passed the receivedData as props, aswell as the favourites array from the app component, and the favourites state from the app component
     return (
         <Container>
+            {isLoading && (
+                <Loader />
+            )}
             <Grid container>
                 <Grid item xs={12} sm={12} md={12} >
                     <Box

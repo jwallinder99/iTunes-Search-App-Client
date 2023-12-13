@@ -7,6 +7,7 @@ Next, navigate to the package.json file for the frontend directory, and add "htt
 Navgiate to each directory in a terminal and type npm install to install dependencies
 Navigate to the backend directory in the terminal and type 'npm start' to start the server
 Navigate to the frontend directory in the terminal and type 'npm start' to start the frontend react app
+To test either the backend or frontend, navigate to either directory in a terminal and type npm test
 
 ## HOW TO USE THE APP
 The app features a searchbar, and radio buttons to select a search term
